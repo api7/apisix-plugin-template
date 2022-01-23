@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "main"
+      - "master"
+  pull_request:
+    branches:
+      - "main"
+      - "master"
+
+jobs:
+  unit-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - ubuntu-18.04
+          - ubuntu-20.04
+        os_name:
+          - linux
+
+    runs-on: ${{ matrix.platform }}
+    env:
+      SERVER_NAME: ${{ matrix.os_name }}
+
+    steps:
+      - name: Check out APISIX
+        uses: actions/checkout@v2.3.4
+        with:
+          path: apisix-plugin
