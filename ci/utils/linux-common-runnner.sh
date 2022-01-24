@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 VAR_CUR_PATH="$(cd $(dirname ${0}); pwd)"
 
 source "${VAR_CUR_PATH}/linux-common.sh"
