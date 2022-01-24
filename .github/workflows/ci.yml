@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Check out APISIX plugins
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
         with:
           path: apisix-plugin
 
