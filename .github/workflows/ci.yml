@@ -15,12 +15,8 @@ jobs:
       matrix:
         platform:
           - ubuntu-20.04
-        os_name:
-          - linux
 
     runs-on: ${{ matrix.platform }}
-    env:
-      SERVER_NAME: ${{ matrix.os_name }}
 
     steps:
       - name: Check out APISIX plugins
