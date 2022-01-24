@@ -26,5 +26,4 @@ jobs:
 
       - name: Check out APISIX repo
         run: |
-          sudo ./ci/utils/linux-common-runnner.sh get_apisix_code
-        working-directory: apisix-plugin
+          sudo ./apisix-plugin/ci/utils/linux-common-runnner.sh get_apisix_code
