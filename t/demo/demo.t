@@ -17,5 +17,7 @@ echo directive provided by ngx_http_echo_module.
             ngx.say('hello, world!')
         }
     }
+--- request
+GET /t
 --- response_body
 hello, world!
