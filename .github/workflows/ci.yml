@@ -27,3 +27,12 @@ jobs:
       - name: Check out APISIX repo
         run: |
           sudo ./apisix-plugin/ci/utils/linux-common-runnner.sh get_apisix_code
+
+      - name: Install custom module
+        run: |
+          sudo ./apisix-plugin/ci/utils/linux-common-runnner.sh install_module
+
+      - name: Launch APISIX env
+        run: |
+          sudo make ci-env-up project_compose_ci=ci/pod/docker-compose.common.yml
+        working-directory: apisix
