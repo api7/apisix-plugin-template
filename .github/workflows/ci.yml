@@ -21,18 +21,40 @@ jobs:
     steps:
       - name: Check out APISIX plugins
         uses: actions/checkout@v2.4.0
-        with:
-          path: apisix-plugin
 
       - name: Check out APISIX repo
         run: |
-          sudo ./apisix-plugin/ci/utils/linux-common-runnner.sh get_apisix_code
+          sudo ./ci/utils/linux-common-runnner.sh get_apisix_code
 
       - name: Install custom module
         run: |
-          sudo ./apisix-plugin/ci/utils/linux-common-runnner.sh install_module
+          sudo ./ci/utils/linux-common-runnner.sh install_module
 
-      - name: Launch APISIX env
+      - name: Launch APISIX common services
         run: |
           sudo make ci-env-up project_compose_ci=ci/pod/docker-compose.common.yml
-        working-directory: apisix
+        working-directory: workbench
+
+#      - name: Launch APISIX deps env
+#        run: |
+#          sudo make ci-env-up
+#          ./ci/linux-ci-init-service.sh
+#        working-directory: workbench
+
+      - name: Run centos7 docker and mapping apisix into container
+        run: |
+          docker run -itd --name centos7Instance \
+            -v $(pwd)/workbench:/apisix \
+            -w /apisix \
+            --net="host" \
+            --dns 8.8.8.8 \
+            --dns-search apache.org \
+            docker.io/centos:7 /bin/bash
+
+      - name: Init centos7 container
+        run: |
+          docker exec centos7Instance bash -c "./ci/centos7-ci.sh install_dependencies"
+
+      - name: Run test case
+        run: |
+          docker exec centos7Instance bash -c "./ci/utils/linux-common-runnner.sh run_case"
