@@ -1,9 +1,21 @@
 use t::APISIX 'no_plan';
 
-log_level('debug');
 repeat_each(1);
 no_long_string();
 no_root_location();
+
+add_block_preprocessor(sub {
+    my ($block) = @_;
+
+    if (!$block->request) {
+        $block->set_value("request", "GET /t");
+    }
+
+    if ((!defined $block->error_log) && (!defined $block->no_error_log)) {
+        $block->set_value("no_error_log", "[error]");
+    }
+});
+
 run_tests;
 
 __DATA__
@@ -17,7 +29,5 @@ echo directive provided by ngx_http_echo_module.
             ngx.say('hello, world!')
         }
     }
---- request
-GET /t
 --- response_body
 hello, world!
