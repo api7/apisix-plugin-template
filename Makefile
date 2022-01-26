@@ -4,8 +4,9 @@
 SHELL := /bin/bash -o pipefail
 
 # Project basic setting
-project_name    ?= apisix-plugin-template
-project_version ?= 0.0.1
+project_name      ?= apisix-plugin-template
+project_version   ?= 0.0.1
+project_ci_runner ?= $(CURDIR)/ci/utils/linux-common-runnner.sh
 
 
 # Hyper-converged Infrastructure
@@ -62,7 +63,7 @@ help:
 .PHONY: init_apisix
 init_apisix:
 	@$(call func_echo_status, "$@ -> [ Start ]")
-	./ci/utils/linux-common-runnner.sh get_apisix_code
+	$(project_ci_runner) get_apisix_code
 	@$(call func_echo_success_status, "$@ -> [ Done ]")
 
 
@@ -70,5 +71,5 @@ init_apisix:
 .PHONY: install
 install:
 	@$(call func_echo_status, "$@ -> [ Start ]")
-	./ci/utils/linux-common-runnner.sh install_module
+	$(project_ci_runner) install_module
 	@$(call func_echo_success_status, "$@ -> [ Done ]")
