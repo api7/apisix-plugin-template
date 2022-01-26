@@ -15,7 +15,7 @@ jobs:
       matrix:
         platform:
           - ubuntu-20.04
-        os_name:
+        job_name:
           - linux_openresty
 
     runs-on: ${{ matrix.platform }}
