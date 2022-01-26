@@ -24,11 +24,11 @@ jobs:
 
       - name: Check out APISIX repo
         run: |
-          sudo ./ci/utils/linux-common-runnner.sh get_apisix_code
+          sudo make init_apisix
 
       - name: Install custom module
         run: |
-          sudo ./ci/utils/linux-common-runnner.sh install_module
+          sudo make install
 
       - name: Launch APISIX common services
         run: |
