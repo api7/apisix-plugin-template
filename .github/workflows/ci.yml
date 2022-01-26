@@ -16,7 +16,7 @@ jobs:
         platform:
           - ubuntu-20.04
         os_name:
-          - linux_openresty_1_17
+          - linux_openresty
 
     runs-on: ${{ matrix.platform }}
     timeout-minutes: 90
