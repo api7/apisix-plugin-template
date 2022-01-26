@@ -15,16 +15,44 @@ jobs:
       matrix:
         platform:
           - ubuntu-20.04
+        job_name:
+          - linux_openresty
 
     runs-on: ${{ matrix.platform }}
+    timeout-minutes: 90
 
     steps:
       - name: Check out APISIX plugins
         uses: actions/checkout@v2.4.0
-        with:
-          path: apisix-plugin
 
       - name: Check out APISIX repo
         run: |
-          sudo ./ci/utils/linux-common-runnner.sh get_apisix_code
-        working-directory: apisix-plugin
+          sudo make init_apisix
+
+      - name: Install custom module
+        run: |
+          sudo make install
+
+      - name: Launch APISIX common services
+        run: |
+          sudo make ci-env-up project_compose_ci=ci/pod/docker-compose.common.yml
+        working-directory: workbench
+
+      - name: Linux Get dependencies
+        run: |
+          sudo apt install -y cpanminus build-essential libncurses5-dev libreadline-dev libssl-dev perl libpcre3 libpcre3-dev libldap2-dev
+
+      - name: Linux Before install
+        run: |
+          sudo ./ci/${{ matrix.job_name }}_runner.sh before_install
+        working-directory: workbench
+
+      - name: Linux Before install
+        run: |
+          sudo ./ci/${{ matrix.job_name }}_runner.sh do_install
+        working-directory: workbench
+
+      - name: Run test case
+        run: |
+          sudo ./ci/utils/linux-common-runnner.sh run_case
+        working-directory: workbench
