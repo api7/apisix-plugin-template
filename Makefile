@@ -49,9 +49,6 @@ endef
 
 
 # Makefile target
-
-
-
 ### help : Show Makefile rules
 .PHONY: help
 help:
