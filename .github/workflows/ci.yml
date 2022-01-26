@@ -44,12 +44,12 @@ jobs:
 
       - name: Linux Before install
         run: |
-          sudo ./ci/linux_openresty_1_17_runner.sh before_install
+          sudo ./ci/${{ matrix.job_name }}_runner.sh before_install
         working-directory: workbench
 
       - name: Linux Before install
         run: |
-          sudo ./ci/linux_openresty_1_17_runner.sh do_install
+          sudo ./ci/${{ matrix.job_name }}_runner.sh do_install
         working-directory: workbench
 
       - name: Run test case
