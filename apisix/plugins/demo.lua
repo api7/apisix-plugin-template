@@ -104,9 +104,9 @@ end
 local function control_api()
     local args = ngx.req.get_uri_args()
     if args["json"] then
-        return 200, {msg = "world"}
+        return 200, {msg = "hello"}
     else
-        return 200, "world\n"
+        return 200, "world"
     end
 end
 
@@ -115,7 +115,7 @@ function _M.control_api()
     return {
         {
             methods = {"GET"},
-            uris = {"/v1/plugin/demo/hello"},
+            uris = {"/v1/plugin/demo/control_api"},
             handler = control_api,
         }
     }

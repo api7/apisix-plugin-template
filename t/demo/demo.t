@@ -81,3 +81,19 @@ passed
 GET /demo
 --- response_body
 {"message":"test"}
+
+
+
+=== TEST 4: test public api
+--- request
+GET /apisix/plugin/demo/public_api
+--- response_body
+{"msg":"public_api"}
+
+
+
+=== TEST 5: test control api
+--- pipelined_requests eval
+["GET /v1/plugin/demo/control_api?json=test", "GET /v1/plugin/demo/control_api"]
+--- response_body eval
+["{\"msg\":\"hello\"}\n", "world"]
