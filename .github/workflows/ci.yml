@@ -47,7 +47,7 @@ jobs:
           sudo ./ci/${{ matrix.job_name }}_runner.sh before_install
         working-directory: workbench
 
-      - name: Linux Before install
+      - name: Linux Do install
         run: |
           sudo ./ci/${{ matrix.job_name }}_runner.sh do_install
         working-directory: workbench
