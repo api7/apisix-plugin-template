@@ -67,6 +67,14 @@ init_apisix:
 	@$(call func_echo_success_status, "$@ -> [ Done ]")
 
 
+### patch_apisix : Patch apisix code
+.PHONY: patch_apisix
+patch_apisix:
+	@$(call func_echo_status, "$@ -> [ Start ]")
+	$(project_ci_runner) patch_apisix_code
+	@$(call func_echo_success_status, "$@ -> [ Done ]")
+
+
 ### install : Install custom plugin
 .PHONY: install
 install:

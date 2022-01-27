@@ -28,6 +28,7 @@ jobs:
       - name: Check out APISIX repo
         run: |
           sudo make init_apisix
+          sudo make patch_apisix
 
       - name: Install custom module
         run: |
