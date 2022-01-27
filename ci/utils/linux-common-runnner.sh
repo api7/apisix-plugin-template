@@ -26,6 +26,16 @@ get_apisix_code() {
 }
 
 
+patch_apisix_code(){
+    # ${1} apisix home dir
+    VAR_APISIX_HOME="${VAR_CUR_HOME}/${1:-workbench}"
+
+    sed -ri -e "/make\s+ci-env-up/d" \
+      -e "/linux-ci-init-service.sh/d" \
+      "${VAR_APISIX_HOME}/ci/linux_openresty_common_runner.sh"
+}
+
+
 install_module() {
     # ${1} apisix home dir
     VAR_APISIX_HOME="${VAR_CUR_HOME}/${1:-workbench}"
@@ -60,6 +70,9 @@ shift
 case ${case_opt} in
 get_apisix_code)
     get_apisix_code "$@"
+    ;;
+patch_apisix_code)
+    patch_apisix_code "$@"
     ;;
 install_module)
     install_module "$@"
