@@ -72,6 +72,8 @@ In the `.github/workflows` directory, you can find definitions for the following
   - Triggered on `push` and `pull_request` events.
   - Run test case in [`t`](t) folder
 
+[Back to TOC][TOC]
+
 ## Useful links
 - [Getting started with GitHub Public Template][github-public-template]
 - [What is APISIX Plugin][apisix-plugin]
