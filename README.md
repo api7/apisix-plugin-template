@@ -26,7 +26,7 @@ get started with Apache APISIX plugin development.
 [badge-action-img]: https://github.com/api7/apisix-plugin-template/actions/workflows/ci.yml/badge.svg
 
 [apisix-architecture-design]: https://apisix.apache.org/docs/apisix/architecture-design/apisix
-[apisix-debug-mode]: https://apisix.apache.org/docs/apisix/architecture-design/debug-mode
 [plugin]: https://apisix.apache.org/docs/apisix/architecture-design/plugin
 [plugin-develop]: https://apisix.apache.org/docs/apisix/plugin-develop
 [apisix-code-style]: https://github.com/apache/apisix/blob/master/CODE_STYLE.md
+[apisix-debug-mode]: https://apisix.apache.org/docs/apisix/architecture-design/debug-mode
