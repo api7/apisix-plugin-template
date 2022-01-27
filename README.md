@@ -18,7 +18,9 @@ get started with Apache APISIX plugin development.
 > Before we dive into plugin development and everything related to it,
 > a brief look at the [GitHub Template][github-public-template] is in order
 
-All you need to do is click the [`Use this template`][apisix-plugin-use-template] button
+All you need to do is click the [`Use this template`][apisix-plugin-use-template] button (you **<ins>must be logged</ins>** in with your GitHub account).
+
+After using the template to create your own blank custom plugin project, the project is ready to be cloned to your local environment and development.
 
 [Back to TOC](#table-of-contents)
 
@@ -27,7 +29,7 @@ All you need to do is click the [`Use this template`][apisix-plugin-use-template
 .
 ├── .github/         GitHub Actions workflows and Dependabot configuration files
 ├── apisix           All files in this folder will be copied and overwrite the original APISIX
-│   └── plugins/     APISIX plugin source
+│   └── plugins/     Plugin source
 ├── ci               All files in this folder will be copied and overwrite the original APISIX
 │   └── utils/       CI utils script folder
 ├── t/               Test case folder
