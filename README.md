@@ -54,7 +54,7 @@ Therefore, the template contains only the following files:
 ```
 
 To start with the actual implementation, you may check our [APISIX Plugin Deveolpment][apisix-plugin-develop],
-which contains an introduction to the essential areas of the plugin development.
+which contains an introduction to the essential parts of the plugin development.
 
 [Back to TOC][TOC]
 
