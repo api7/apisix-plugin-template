@@ -8,12 +8,32 @@ get started with Apache APISIX plugin development.
 > This template was designed to work with the [GitHub Action](https://github.com/features/actions) development environments.
 
 ## Table of contents
-- [Getting started](#getting-started) 
+- [Getting started](#getting-started)
+- [Plugin template structure](#plugin-template-structure)
 - [Useful links](#useful-links)
 
 ### Getting Started
 > Before we dive into plugin development and everything related to it,
 > a brief look at the [GitHub Template][github-public-template] is in order
+
+All you need to do is click the `Use this template` button, 
+
+[Back to TOC](#table-of-contents)
+
+### Plugin template structure
+```
+.
+├── .github/         GitHub Actions workflows and Dependabot configuration files
+├── apisix           All files in this folder will be copied and overwrite the original APISIX
+│   └── plugins/     APISIX plugin source
+├── ci               All files in this folder will be copied and overwrite the original APISIX
+│   └── utils/       CI utils script folder
+├── t/               Test case folder
+├── LICENSE
+├── Makefile
+└── README.md        README
+```
+[Back to TOC](#table-of-contents)
 
 ### Useful links
 - [Getting started with GitHub Public Template][github-public-template]
