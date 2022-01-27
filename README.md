@@ -15,12 +15,18 @@ get started with Apache APISIX plugin development.
 
 ### Useful links
 - [What is APISIX Plugin][plugin]
-- [APISIX Plugin deveolpment][plugin-develop]
-- [APISIX Code Style][code-style]
+- [APISIX Architecture Design][apisix-architecture-design]
+- [APISIX Plugin Deveolpment][plugin-develop]
+- [APISIX Code Style][apisix-code-style]
+- [APISIX Debug Mode][apisix-debug-mode]
+
+[Back to TOC](#table-of-contents)
 
 [badge-action-url]: https://github.com/api7/apisix-plugin-template/actions
 [badge-action-img]: https://github.com/api7/apisix-plugin-template/actions/workflows/ci.yml/badge.svg
 
+[apisix-architecture-design]: https://apisix.apache.org/docs/apisix/architecture-design/apisix
+[apisix-debug-mode]: https://apisix.apache.org/docs/apisix/architecture-design/debug-mode
 [plugin]: https://apisix.apache.org/docs/apisix/architecture-design/plugin
 [plugin-develop]: https://apisix.apache.org/docs/apisix/plugin-develop
-[code-style]: https://github.com/apache/apisix/blob/master/CODE_STYLE.md
+[apisix-code-style]: https://github.com/apache/apisix/blob/master/CODE_STYLE.md
