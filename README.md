@@ -50,7 +50,8 @@ Therefore, the template contains only the following files:
 │   └── plugins/
 │       └── demo.lua
 └── t
-    └── demo.t      
+    └── demo/
+        └── demo.t      
 ```
 
 To start with the actual implementation, you may check our [APISIX Plugin Deveolpment][apisix-plugin-develop],
