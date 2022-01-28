@@ -50,7 +50,8 @@ Therefore, the template contains only the following files:
 │   └── plugins/
 │       └── demo.lua
 └── t
-    └── demo.t      
+    └── demo/
+        └── demo.t      
 ```
 
 To start with the actual implementation, you may check our [APISIX Plugin Deveolpment][apisix-plugin-develop],
@@ -70,6 +71,8 @@ In the `.github/workflows` directory, you can find definitions for the following
 - [CI](.github/workflows/ci.yml)
   - Triggered on `push` and `pull_request` events.
   - Run test case in [`t`](t) folder
+
+[Back to TOC][TOC]
 
 ## Useful links
 - [Getting started with GitHub Public Template][github-public-template]
