@@ -1,22 +1,29 @@
 -- local common libs
 local require = require
 local core    = require("apisix.core")
+local ngx     = ngx
 
 -- local function
 
 -- module define
+local plugin_sharedict = ngx.shared["demo_dict"]
+
 local plugin_name = "demo"
 
 -- plugin schema
 local plugin_schema = {
     type = "object",
     properties = {
-        body = {
-            description = "body to replace response.",
-            type = "string"
+        msg = {
+            type = "string",
         },
+        ttl = {
+            type = "integer",
+            default = 60,
+            minumum = 1,
+        }
     },
-    required = {"body"},
+    required = {"msg"},
 }
 
 local _M = {
@@ -25,12 +32,6 @@ local _M = {
     name     = plugin_name,    -- plugin name
     schema   = plugin_schema,  -- plugin schema
 }
-
-
--- module interface for init phase
-function _M.init()
-
-end
 
 
 -- module interface for schema check
@@ -42,84 +43,21 @@ function _M.check_schema(conf, schema_type)
 end
 
 
--- module interface for rewrite phase
--- not actually rewrite, just before framework's access phase
-function _M.rewrite()
-
-end
-
-
 -- module interface for access phase
 -- @param `conf`
 -- @param `ctx`
 -- @return <int, object or string>
 function _M.access(conf, ctx)
-    return 200, { message = conf.body }
-end
+    local val, err = plugin_sharedict:incr(plugin_name, 1, 0, conf.ttl)
 
-
--- module interface for access phase
-function _M.before_proxy(conf, ctx)
-
-end
-
-
--- module interface for header_filter phase
-function _M.header_filter(conf, ctx)
-
-end
-
-
--- module interface for body_filter phase
-function _M.body_filter(conf, ctx)
-
-end
-
-
--- module interface for log phase
--- @param `conf`
--- @param `api_ctx`
-function _M.log(conf, ctx)
-
-end
-
-
-local function public_api()
-    return 200, {msg = "public_api"}
-end
-
-
--- module interface for export public api
-function _M.api()
-    return {
-        {
-            methods = {"GET"},
-            uri = "/apisix/plugin/demo/public_api",
-            handler = public_api,
-        }
-    }
-end
-
-
-local function control_api()
-    local args = ngx.req.get_uri_args()
-    if args["json"] then
-        return 200, {msg = "hello"}
-    else
-        return 200, "world"
+    if err then
+        core.log.error("failed to exec sharedict op, err: ", err)
+        return 500, { err = err }
     end
+
+    return 200, { message = conf.msg , count = val}
 end
 
-
-function _M.control_api()
-    return {
-        {
-            methods = {"GET"},
-            uris = {"/v1/plugin/demo/control_api"},
-            handler = control_api,
-        }
-    }
-end
 
 --
 return _M

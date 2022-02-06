@@ -7,10 +7,18 @@ no_root_location();
 add_block_preprocessor(sub {
     my ($block) = @_;
 
+    # setup plugin sharedict
+    my $extra_http_config = $block->http_config // '';
+    $extra_http_config .= <<_EOC_;
+    lua_shared_dict demo_dict 10m;
+_EOC_
+
+    $block->set_value("http_config", $extra_http_config);
+
     # setup default conf.yaml
     my $extra_yaml_config = $block->extra_yaml_config // <<_EOC_;
 plugins:
-    - demo
+  - demo
 _EOC_
 
     $block->set_value("extra_yaml_config", $extra_yaml_config);
@@ -52,7 +60,7 @@ hello, world!
                 [[{
                     "plugins": {
                         "demo": {
-                            "body": "test"
+                            "msg": "test"
                         }
                     },
                     "upstream": {
@@ -77,23 +85,7 @@ passed
 
 
 === TEST 3: verify demo access logic
---- request
-GET /demo
---- response_body
-{"message":"test"}
-
-
-
-=== TEST 4: test public api
---- request
-GET /apisix/plugin/demo/public_api
---- response_body
-{"msg":"public_api"}
-
-
-
-=== TEST 5: test control api
 --- pipelined_requests eval
-["GET /v1/plugin/demo/control_api?json=test", "GET /v1/plugin/demo/control_api"]
+["GET /demo", "GET /demo"]
 --- response_body eval
-["{\"msg\":\"hello\"}\n", "world"]
+[qr/\"count\":1/, qr/\"count\":2/]
