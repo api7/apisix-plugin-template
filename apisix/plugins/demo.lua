@@ -52,7 +52,7 @@ function _M.access(conf, ctx)
 
     if err then
         core.log.error("failed to exec sharedict op, err: ", err)
-        return 500, { err = err }
+        return 503, { err = err }
     end
 
     return 200, { message = conf.msg , count = val}
