@@ -58,7 +58,7 @@ run_case() {
     ./bin/apisix init_etcd
 
     git submodule update --init --recursive
-    FLUSH_ETCD=1 prove -I../test-nginx/lib -I./ -r -s t/demo
+    prove -I../test-nginx/lib -I./ -r -s t/demo
 }
 
 # =======================================
