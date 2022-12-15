@@ -19,7 +19,7 @@ export_or_prefix() {
 get_apisix_code() {
     # ${1} branch name
     # ${2} checkout path
-    git_branch=${1:-release/2.12}
+    git_branch=${1:-release/2.15}
     git_checkout_path=${2:-workbench}
     git clone --depth 1 --recursive https://github.com/apache/apisix.git \
         -b "${git_branch}" "${git_checkout_path}" && cd "${git_checkout_path}" || exit 1

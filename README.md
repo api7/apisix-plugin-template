@@ -62,6 +62,13 @@ which contains an introduction to the essential parts of the plugin development.
 ## Testing
 [Testing plugins][apisix-testing-framework] is an essential part of the plugin development to make sure that everything works as expected.
 
+### Local with docker
+In order to run the test locally a [Docker Compose](https://docs.docker.com/compose/) file is provided.
+
+To start the services needed to run the test execute `docker-compose up -d`.
+Once these services are running you can run the tests by executing `docker-compose run --rm apisix`.
+If you would like to run a specific test for example `demo` you can execute `docker-compose run --rm apisix 't/demo'`.
+
 ### Continuous integration
 [Continuous integration][continuous-integration] (CI) depends on [GitHub Actions][github-actions], a set of workflows that make it possible to automate your testing process.
 Thanks to such automation, you can delegate the testing and verification phases to the CI and instead focus on development (and writing more tests).

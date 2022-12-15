@@ -11,6 +11,7 @@ add_block_preprocessor(sub {
     my $extra_yaml_config = $block->extra_yaml_config // <<_EOC_;
 plugins:
     - demo
+    - public-api
 _EOC_
 
     $block->set_value("extra_yaml_config", $extra_yaml_config);
@@ -46,33 +47,45 @@ hello, world!
 --- config
     location = /t {
         content_by_lua_block {
-            local t = require("lib.test_admin").test
-            local code, body = t('/apisix/admin/routes/1',
-                ngx.HTTP_PUT,
-                [[{
-                    "plugins": {
-                        "demo": {
-                            "body": "test"
-                        }
-                    },
-                    "upstream": {
-                        "nodes": {
-                            "127.0.0.1:1980": 1
+            local data = {
+                {
+                    url = "/apisix/admin/routes/1",
+                    data = [[{
+                        "plugins": {
+                            "demo": {
+                                "body": "test"
+                            }
                         },
-                        "type": "roundrobin"
-                    },
-                    "uri": "/demo"
-                }]]
-                )
+                        "upstream": {
+                            "nodes": {
+                                "127.0.0.1:1980": 1
+                            },
+                            "type": "roundrobin"
+                        },
+                        "uri": "/demo"
+                    }]],
+                },
+                {
+                    url = "/apisix/admin/routes/r1",
+                    data = [[{
+                        "plugins": {
+                            "public-api": {}
+                        },
+                        "uri": "/apisix/plugin/demo/public_api"
+                    }]]
+                },
+            }
 
-            if code >= 300 then
-                ngx.status = code
+            local t = require("lib.test_admin").test
+
+            for _, data in ipairs(data) do
+                local code, body = t(data.url, ngx.HTTP_PUT, data.data)
+                ngx.say(code..body)
             end
-            ngx.say(body)
         }
     }
---- response_body
-passed
+--- response_body eval
+"201passed\n" x 2
 
 
 
