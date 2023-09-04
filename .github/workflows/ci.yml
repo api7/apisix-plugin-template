@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Check out APISIX plugins
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Check out APISIX repo
         run: |
