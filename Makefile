@@ -63,7 +63,7 @@ help:
 .PHONY: init_apisix
 init_apisix:
 	@$(call func_echo_status, "$@ -> [ Start ]")
-	$(project_ci_runner) get_apisix_code release/3.4
+	$(project_ci_runner) get_apisix_code
 	@$(call func_echo_success_status, "$@ -> [ Done ]")
 
 
